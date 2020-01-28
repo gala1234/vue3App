@@ -2,6 +2,7 @@
   <nav>
     <router-link to="/">Product</router-link>
     <router-link to="/users">Users</router-link>
+    <router-link to="/todos">Todos</router-link>
   </nav>
 </template>
 

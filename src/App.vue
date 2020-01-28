@@ -1,17 +1,5 @@
 <template>
   <div id="app">
-    <h4>Todo:</h4>
-    <ul>
-      <li v-for="(todo, index) in todos" v-bind:key="index">{{ todo.text }}</li>
-    </ul>
-    <h4>Done:</h4>
-    <ul>
-      <li v-for="(done, index) in dones" v-bind:key="index">{{ done.text }}</li>
-    </ul>
-    <label>Add todo:</label>
-    <input type="text" v-model="newTodo.text" @keyup.enter="addTodo(newTodo)">
-    <label>Add todo Async:</label>
-    <input type="text" v-model="id" @keyup.enter="addTodoAsync(id)">
     <Shop></Shop>
   </div>
 </template>
@@ -27,21 +15,7 @@ import { Todo } from './types'
     Shop
   }
 })
-export default class App extends Vue {
-  @Getter todos!: Todo[];
-  @Getter dones!: Todo[];
-
-  @Mutation addTodo!: Todo[]
-
-  @Action addTodoAsync! : Todo[]
-
-  newTodo: Todo = {
-    text: '',
-    checked: false
-  }
-
-  id: string = '1'
-}
+export default class App extends Vue {}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
