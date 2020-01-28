@@ -35,24 +35,36 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import { Getter, Mutation, Action } from 'vuex-class'
-import { Todo } from '../../types'
+import { State, Getter, Mutation, Action } from 'vuex-class'
+import { Task } from '../../types'
 
 @Component
 export default class Todos extends Vue {
-  @Getter todos!: Todo[];
-  @Getter dones!: Todo[];
+  @State tasks!: Task[];
 
-  @Mutation addTodo!: Todo[];
-  @Mutation toggleTodo!: Todo[];
+  @Getter todos!: Task[];
+  @Getter dones!: Task[];
 
-  @Action addTodoAsync!: Todo[];
+  @Mutation addTodo!: Task[];
+  @Mutation toggleTodo!: Task[];
 
-  newTodo: Todo = {
+  @Action addTodoAsync!: Task[];
+
+  newTodo: Task = {
     text: '',
+    id: this.tasks && this.tasks.length,
     checked: false
   };
 
-  id: string = '1';
+  id: number = 0;
+
+  mounted () {
+    this.id = this.tasks.length + 1
+  }
+
+  updated () {
+    const newId = (tasks: Task[]) => this.tasks.length++
+    console.log(newId(this.tasks))
+  }
 }
 </script>

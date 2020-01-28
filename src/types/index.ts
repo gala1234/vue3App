@@ -1,11 +1,11 @@
-import { Todo } from './todos'
+import { Task } from './tasks'
 import { User } from './users'
 
-export * from './todos'
+export * from './tasks'
 export * from './users'
 
 // Store
 export interface State {
-    todos: Todo[],
+    tasks: Task[],
     // users: User[]
 }

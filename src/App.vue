@@ -7,8 +7,6 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import Shop from './components/Shop.vue'
-import { Getter, Mutation, Action } from 'vuex-class'
-import { Todo } from './types'
 
 @Component({
   components: {

@@ -1,6 +1,6 @@
 
 // Models
-export interface Todo {
+export interface Task {
     text: string,
     id: number,
     checked: boolean

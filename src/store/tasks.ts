@@ -1,8 +1,8 @@
 import { GetterTree, MutationTree, ActionTree } from 'vuex'
-import { State, Todo } from '../types'
+import { State, Task } from '../types'
 
 export const state: State = {
-  todos: [
+  tasks: [
     { text: 'Buy milk', id: 1, checked: false },
     { text: 'Buy chocolate', id: 2, checked: true },
     { text: 'Buy bread', id: 3, checked: false }
@@ -12,15 +12,15 @@ export const state: State = {
 // Getters are functions that receive the state as a first parameter, by default they are type as any.
 // To add a type to the getters is used the GetterTree, it received 2 parameters, State and RouterState.
 export const getters: GetterTree<State, any> = {
-  todos: state => state.todos.filter(todo => !todo.checked),
-  dones: state => state.todos.filter(todo => todo.checked)
+  todos: state => state.tasks.filter(todo => !todo.checked),
+  dones: state => state.tasks.filter(todo => todo.checked)
 }
 
 // As the getters, mutations are typed as any, to add the type, is used the mutationTree
 export const mutations: MutationTree<State> = {
   addTodo (state, newTodo) {
     const todoCopy = Object.assign({}, newTodo)
-    state.todos.push(todoCopy)
+    state.tasks.push(todoCopy)
   },
   toggleTodo (any, todo) {
     todo.checked = !todo.checked
@@ -34,8 +34,9 @@ export const actions: ActionTree<State, any> = {
     fetch('https://jsonplaceholder.typicode.com/posts/' + id)
       .then(data => data.json())
       .then(item => {
-        const todo: Todo = {
+        const todo: Task = {
           checked: false,
+          id: item.id,
           text: item.title
         }
 
