@@ -3,9 +3,9 @@ import { State, Todo } from '../types'
 
 export const state: State = {
   todos: [
-    { text: 'Buy milk', checked: false },
-    { text: 'Buy chocolate', checked: true },
-    { text: 'Buy bread', checked: false }
+    { text: 'Buy milk', id: 1, checked: false },
+    { text: 'Buy chocolate', id: 2, checked: true },
+    { text: 'Buy bread', id: 3, checked: false }
   ]
 }
 
@@ -21,6 +21,9 @@ export const mutations: MutationTree<State> = {
   addTodo (state, newTodo) {
     const todoCopy = Object.assign({}, newTodo)
     state.todos.push(todoCopy)
+  },
+  toggleTodo (any, todo) {
+    todo.checked = !todo.checked
   }
 }
 
