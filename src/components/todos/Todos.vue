@@ -34,7 +34,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue, Watch } from 'vue-property-decorator'
 import { State, Getter, Mutation, Action } from 'vuex-class'
 import { Task } from '../../types'
 
@@ -52,19 +52,17 @@ export default class Todos extends Vue {
 
   newTodo: Task = {
     text: '',
-    id: this.tasks && this.tasks.length,
+    id: this.tasks.length + 1,
     checked: false
   };
 
-  id: number = 0;
-
-  mounted () {
-    this.id = this.tasks.length + 1
+  @Watch('this.tasks')
+  onPropertyChanged (value: Task[], oldValue: Task[]) {
+    console.log('value', value, 'oldValue', oldValue)
   }
 
   updated () {
-    const newId = (tasks: Task[]) => this.tasks.length++
-    console.log(newId(this.tasks))
+    console.log(this.tasks)
   }
 }
 </script>
