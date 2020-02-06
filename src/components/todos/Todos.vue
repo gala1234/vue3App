@@ -13,7 +13,7 @@
             <label for="checkbox">{{ todo.text }}</label>
       </li>
     </ul>
-    <h4>Done:</h4>
+     <h4>Done:</h4>
     <ul>
       <li
         v-for="(done) in dones"
@@ -29,40 +29,50 @@
     <label>Add todo:</label>
     <input type="text" v-model="newTodo.text" @keyup.enter="addTodo(newTodo)" />
     <label>Add todo Async:</label>
-    <input type="text" v-model="id" @keyup.enter="addTodoAsync(id)" />
+    <input type="text" v-model="newId" @keyup.enter="addTodoAsync(newId)" />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue, Watch } from 'vue-property-decorator'
 import { State, Getter, Mutation, Action } from 'vuex-class'
-import { Task } from '../../types'
+import { TaskInterface } from '../../types'
 
 @Component
 export default class Todos extends Vue {
-  @State tasks!: Task[];
+  @State tasks!: TaskInterface[];
 
-  @Getter todos!: Task[];
-  @Getter dones!: Task[];
+  @Getter todos!: TaskInterface[];
+  @Getter dones!: TaskInterface[];
 
-  @Mutation addTodo!: Task[];
-  @Mutation toggleTodo!: Task[];
+  @Mutation addTodo!: TaskInterface[];
+  @Mutation toggleTodo!: TaskInterface[];
 
-  @Action addTodoAsync!: Task[];
+  @Action addTodoAsync!: TaskInterface[];
 
-  newTodo: Task = {
+  newId () {
+    return this.tasks && this.tasks.length + 1
+  }
+
+  newTodo: TaskInterface = {
     text: '',
-    id: this.tasks.length + 1,
+    id: this.newId(),
     checked: false
   };
 
   @Watch('this.tasks')
-  onPropertyChanged (value: Task[], oldValue: Task[]) {
+  onPropertyChanged (value: TaskInterface[], oldValue: TaskInterface[]) {
     console.log('value', value, 'oldValue', oldValue)
   }
 
+  mounted () {
+    this.newId()
+    console.log('newId', this.newId())
+  }
+
   updated () {
-    console.log(this.tasks)
+    this.newId()
+    console.log('newId', this.newId())
   }
 }
 </script>

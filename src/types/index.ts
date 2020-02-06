@@ -1,11 +1,11 @@
-import { Task } from './tasks'
+import { TaskInterface } from './tasks'
 import { User } from './users'
 
 export * from './tasks'
 export * from './users'
 
 // Store
-export interface State {
-    tasks: Task[],
+export interface StateInterface {
+    tasks: TaskInterface[],
     // users: User[]
 }

@@ -1,6 +1,6 @@
 
 // Models
-export interface Task {
+export interface TaskInterface {
     text: string,
     id: number,
     checked: boolean
