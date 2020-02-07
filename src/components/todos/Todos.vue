@@ -45,30 +45,26 @@ export default class Todos extends Vue {
   @Getter todos!: TaskInterface[];
   @Getter dones!: TaskInterface[];
 
-  @Mutation addTodo!: TaskInterface[];
+  @Mutation addTodo!: any;
   @Mutation toggleTodo!: TaskInterface[];
 
   @Action addTodoAsync!: any;
 
-  newId: number = 0;
-
-  generateNewId () {
+  get newId () {
     return this.tasks && this.tasks.length + 1
   }
 
-  addTodoAsyncId (newId: number) {
-    const id: number = (this.tasks.map(task => Object.values(task).includes(newId)) || !newId) ? this.generateNewId() : newId
-    this.addTodoAsync(id)
+  get newTodo () {
+    return {
+      text: '',
+      id: this.newId,
+      checked: false
+    }
   }
 
-  newTodo: TaskInterface = {
-    text: '',
-    id: this.generateNewId(),
-    checked: false
-  };
-
-  mounted () {
-    this.newId = this.generateNewId()
+  addTodoAsyncId (newId: number) {
+    const id: number = (this.tasks.map(task => Object.values(task).includes(newId)) || !newId) ? this.newId : newId
+    this.addTodoAsync(id)
   }
 }
 </script>
