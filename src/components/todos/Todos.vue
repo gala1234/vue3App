@@ -34,7 +34,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Watch } from 'vue-property-decorator'
+import { Component, Vue } from 'vue-property-decorator'
 import { State, Getter, Mutation, Action } from 'vuex-class'
 import { TaskInterface } from '../../types'
 

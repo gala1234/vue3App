@@ -1,5 +1,5 @@
 import { TaskInterface } from './tasks'
-import { User } from './users'
+import { UserInterface } from './users'
 
 export * from './tasks'
 export * from './users'
@@ -7,5 +7,5 @@ export * from './users'
 // Store
 export interface StateInterface {
     tasks: TaskInterface[],
-    // users: User[]
+    users: UserInterface[]
 }

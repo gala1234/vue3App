@@ -1,22 +1,15 @@
-import { GetterTree, MutationTree, ActionTree } from 'vuex'
-import { StateInterface, User } from '../types'
+import { ActionTree } from 'vuex'
+import { StateInterface, UserInterface } from '../../types'
 
 export const actions: ActionTree<StateInterface, any> = {
   addUserAsync (contex, id) {
     fetch('https://jsonplaceholder.typicode.com/users/' + id)
       .then(data => data.json())
       .then(item => {
-        const user: User = {
+        const user: UserInterface = {
           id: item.id,
           name: item.name,
-          age: item.age,
-          description: item.description,
-          services: {
-            a: item.services.a,
-            b: item.services.b,
-            c: item.services.c
-          },
-          gender: item.gender,
+          username: item.username,
           email: item.email,
           address: {
             street: item.address.street,
@@ -29,13 +22,7 @@ export const actions: ActionTree<StateInterface, any> = {
             }
           },
           phone: item.phone,
-          website: item.website,
-          some: {
-            fb: item.some.fb,
-            ig: item.some.ig,
-            li: item.some.li,
-            yt: item.some.yt
-          }
+          website: item.website
         }
 
         contex.commit('addUser', user)

@@ -1,17 +1,9 @@
 
 // Models
-export interface User {
+export interface UserInterface {
     id: number,
     name: string,
-    age: string,
-    description: string,
-    services: {
-        a: boolean,
-        b: boolean,
-        c: boolean,
-    },
-    gender: string,
-    phone: number,
+    username: string,
     email: string,
     address: {
       street: string,
@@ -23,11 +15,6 @@ export interface User {
         lng: number
       }
     },
-    some: {
-        fb: string,
-        ig: string,
-        li: string,
-        yt: string,
-    },
+    phone: number,
     website: string,
   }
