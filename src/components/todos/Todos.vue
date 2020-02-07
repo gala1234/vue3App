@@ -29,7 +29,7 @@
     <label>Add todo:</label>
     <input type="text" v-model="newTodo.text" @keyup.enter="addTodo(newTodo)" />
     <label>Add todo Async:</label>
-    <input type="text" v-model="newId" @keyup.enter="addTodoAsync(newId)" />
+    <input type="text" v-model.lazy="newId" @keyup.enter="addTodoAsyncId(newId)" />
   </div>
 </template>
 
@@ -48,31 +48,27 @@ export default class Todos extends Vue {
   @Mutation addTodo!: TaskInterface[];
   @Mutation toggleTodo!: TaskInterface[];
 
-  @Action addTodoAsync!: TaskInterface[];
+  @Action addTodoAsync!: any;
 
-  newId () {
+  newId: number = 0;
+
+  generateNewId () {
     return this.tasks && this.tasks.length + 1
+  }
+
+  addTodoAsyncId (newId: number) {
+    const id: number = (this.tasks.map(task => Object.values(task).includes(newId)) || !newId) ? this.generateNewId() : newId
+    this.addTodoAsync(id)
   }
 
   newTodo: TaskInterface = {
     text: '',
-    id: this.newId(),
+    id: this.generateNewId(),
     checked: false
   };
 
-  @Watch('this.tasks')
-  onPropertyChanged (value: TaskInterface[], oldValue: TaskInterface[]) {
-    console.log('value', value, 'oldValue', oldValue)
-  }
-
   mounted () {
-    this.newId()
-    console.log('newId', this.newId())
-  }
-
-  updated () {
-    this.newId()
-    console.log('newId', this.newId())
+    this.newId = this.generateNewId()
   }
 }
 </script>
