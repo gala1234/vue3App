@@ -1,7 +1,7 @@
 import { ActionTree } from 'vuex'
-import { StateInterface, UserInterface } from '../../types'
+import { UserInterface } from '../../types'
 
-export const actions: ActionTree<StateInterface, any> = {
+export const actions: ActionTree<UserInterface, any> = {
   addUserAsync (contex, id) {
     fetch('https://jsonplaceholder.typicode.com/users/' + id)
       .then(data => data.json())

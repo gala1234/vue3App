@@ -1,9 +1,9 @@
 import { ActionTree } from 'vuex'
-import { StateInterface, TaskInterface } from '../../types'
+import { TaskInterface } from '../../types'
 
 // As getters, actions are typed as any, to add the type, is used the ActionTree,
 // it received 2 parameters, State and Root State.
-export const actions: ActionTree<StateInterface, any> = {
+export const actions: ActionTree<TaskInterface[], any> = {
   addTodoAsync ({ commit }, id) {
     fetch('https://jsonplaceholder.typicode.com/posts/' + id)
       .then(data => {

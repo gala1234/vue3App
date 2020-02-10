@@ -8,6 +8,15 @@ import './registerServiceWorker'
 
 Vue.config.productionTip = false
 
+// Lazy load a Vuex component at runtime using typescript
+const load = true
+
+if (load) {
+  import('./store/login').then(({ login }) => {
+    store.registerModule('login', login)
+  })
+}
+
 new Vue({
   el: '#app',
   router,

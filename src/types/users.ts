@@ -1,7 +1,7 @@
 
 // Models
 export interface UserInterface {
-    id: number,
+    id: number | null,
     name: string,
     username: string,
     email: string,
@@ -11,10 +11,10 @@ export interface UserInterface {
       city: string,
       zipcode: string,
       geo: {
-        lat: number,
-        lng: number
+        lat: number | null,
+        lng: number | null
       }
     },
-    phone: number,
+    phone: number | null,
     website: string,
   }

@@ -1,14 +1,13 @@
 <template>
-    <div class="nav-bar">
-        <button
-          v-if="!login.isLoggedIn"
-          @click="loginMutation"
-        >
-          Login
-        </button>
-        <p v-else>Hello {{ login.user }}</p>
-        <Cart :cart="cart" ></Cart>
+  <div class="nav-bar">
+    <div v-if="login">
+      <button v-if="!login.isLoggedIn" @click="loginMutation">
+        Login
+      </button>
+      <p v-else>Hello {{ login.user }}</p>
     </div>
+    <Cart :cart="cart"></Cart>
+  </div>
 </template>
 
 <script lang="ts">
@@ -23,11 +22,11 @@ import Cart from '../cart/Cart.vue'
   }
 })
 export default class Header extends Vue {
-    @State login!: LoginInterface;
-    @Mutation('login') loginMutation!: any
+  @State login!: LoginInterface;
+  @Mutation('login') loginMutation!: any;
 
-    @Prop() private cart!: string[];
-    @Prop() private premium!: boolean;
+  @Prop() private cart!: string[];
+  @Prop() private premium!: boolean;
 }
 </script>
 
