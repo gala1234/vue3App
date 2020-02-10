@@ -1,12 +1,21 @@
 <template>
     <div class="nav-bar">
+        <button
+          v-if="!login.isLoggedIn"
+          @click="loginMutation"
+        >
+          Login
+        </button>
+        <p v-else>Hello {{ login.user }}</p>
         <Cart :cart="cart" ></Cart>
     </div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
-import Cart from './Cart.vue'
+import { State, Mutation } from 'vuex-class'
+import { LoginInterface } from '../../types'
+import Cart from '../cart/Cart.vue'
 
 @Component({
   components: {
@@ -14,6 +23,9 @@ import Cart from './Cart.vue'
   }
 })
 export default class Header extends Vue {
+    @State login!: LoginInterface;
+    @Mutation('login') loginMutation!: any
+
     @Prop() private cart!: string[];
     @Prop() private premium!: boolean;
 }

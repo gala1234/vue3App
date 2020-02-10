@@ -9,8 +9,8 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
-import Header from './Header.vue'
-import NavBar from './NavBar.vue'
+import Header from './header/Header.vue'
+import NavBar from './navBar/NavBar.vue'
 import Product from './product/Product.vue'
 
 @Component({
