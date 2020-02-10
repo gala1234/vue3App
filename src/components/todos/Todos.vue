@@ -35,20 +35,24 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import { State, Getter, Mutation, Action } from 'vuex-class'
+import { State, Getter, Mutation, Action, namespace } from 'vuex-class'
 import { TaskInterface } from '../../types'
+
+const TasksGetter = namespace('tasks', Getter)
+const TasksMutation = namespace('tasks', Mutation)
+const TasksAction = namespace('tasks', Action)
 
 @Component
 export default class Todos extends Vue {
   @State tasks!: TaskInterface[];
 
-  @Getter todos!: TaskInterface[];
-  @Getter dones!: TaskInterface[];
+  @TasksGetter todos!: TaskInterface[];
+  @TasksGetter dones!: TaskInterface[];
 
-  @Mutation addTodo!: any;
-  @Mutation toggleTodo!: TaskInterface[];
+  @TasksMutation addTodo!: any;
+  @TasksMutation toggleTodo!: TaskInterface[];
 
-  @Action addTodoAsync!: any;
+  @TasksAction addTodoAsync!: any;
 
   get newId () {
     return this.tasks && this.tasks.length + 1

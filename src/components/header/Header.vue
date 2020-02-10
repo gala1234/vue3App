@@ -12,9 +12,11 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
-import { State, Mutation } from 'vuex-class'
+import { State, Mutation, namespace } from 'vuex-class'
 import { LoginInterface } from '../../types'
 import Cart from '../cart/Cart.vue'
+
+const LoginMutation = namespace('login', Mutation)
 
 @Component({
   components: {
@@ -23,7 +25,7 @@ import Cart from '../cart/Cart.vue'
 })
 export default class Header extends Vue {
   @State login!: LoginInterface;
-  @Mutation('login') loginMutation!: any;
+  @LoginMutation('login') loginMutation!: any;
 
   @Prop() private cart!: string[];
   @Prop() private premium!: boolean;
